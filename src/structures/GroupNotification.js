@@ -45,7 +45,7 @@ class GroupNotification extends Base {
          */
         this.chatId =
             typeof data.id.remote === 'object'
-                ? data.id.remote._serialized
+                ? Base._serializedId(data.id.remote)
                 : data.id.remote;
 
         /**
@@ -54,7 +54,7 @@ class GroupNotification extends Base {
          */
         this.author =
             typeof data.author === 'object'
-                ? data.author._serialized
+                ? Base._serializedId(data.author)
                 : data.author;
 
         /**

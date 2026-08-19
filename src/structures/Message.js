@@ -35,7 +35,7 @@ class Message extends Base {
          * ID that represents the message
          * @type {object}
          */
-        this.id = data.id;
+        this.id = Base._normalizeId(data.id);
 
         /**
          * ACK status for the message
@@ -75,7 +75,7 @@ class Message extends Base {
          */
         this.from =
             typeof data.from === 'object' && data.from !== null
-                ? data.from._serialized
+                ? Base._serializedId(data.from)
                 : data.from;
 
         /**
@@ -87,7 +87,7 @@ class Message extends Base {
          */
         this.to =
             typeof data.to === 'object' && data.to !== null
-                ? data.to._serialized
+                ? Base._serializedId(data.to)
                 : data.to;
 
         /**
@@ -96,7 +96,7 @@ class Message extends Base {
          */
         this.author =
             typeof data.author === 'object' && data.author !== null
-                ? data.author._serialized
+                ? Base._serializedId(data.author)
                 : data.author;
 
         /**
@@ -209,16 +209,8 @@ class Message extends Base {
                       inviteCodeExp: data.inviteCodeExp,
                       groupId: data.inviteGrp,
                       groupName: data.inviteGrpName,
-                      fromId:
-                          typeof data.from === 'object' &&
-                          '_serialized' in data.from
-                              ? data.from._serialized
-                              : data.from,
-                      toId:
-                          typeof data.to === 'object' &&
-                          '_serialized' in data.to
-                              ? data.to._serialized
-                              : data.to,
+                      fromId: Base._serializedId(data.from) ?? data.from,
+                      toId: Base._serializedId(data.to) ?? data.to,
                   }
                 : undefined;
 
